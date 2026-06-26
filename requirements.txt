@@ -8,7 +8,7 @@ djangorestframework==3.17.1
 dnspython==2.8.0
 flake8==7.1.1
 flake8-html==0.4.3
-idna==3.8
+idna==3.15
 Jinja2==3.1.6
 MarkupSafe==3.0.2
 mccabe==0.7.0
@@ -17,9 +17,9 @@ pycodestyle==2.12.1
 pyflakes==3.2.0
 Pygments==2.19.1
 pymongo==4.17.0
-requests==2.32.3
+requests==2.33.0
 ruff==0.15.20
 shelve_cache==0.0.4
 soupsieve==2.6
 sqlparse==0.5.5
-urllib3==2.2.2
+urllib3==2.7.0
