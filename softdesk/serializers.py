@@ -22,7 +22,7 @@ class CommentSerializer(ModelSerializer):
     author = StringRelatedField()
     
     class Meta:
-        model : Comment
-        fields = ('uudi','description','issue','author')
+        model = Comment
+        fields = ('uuid','description','issue','author')
         
         

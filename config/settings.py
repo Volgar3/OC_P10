@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'authentication',
     "softdesk",
     "rest_framework",
+    'rest_framework_simplejwt',
 ]
 
 MIDDLEWARE = [
@@ -121,8 +122,7 @@ STATIC_URL = 'static/'
 
 # Django Rest Framework
 REST_FRAMEWORK = {
-    # TODO: passer à IsAuthenticated quand le JWT sera en place
-    "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.AllowAny",
-    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
 }

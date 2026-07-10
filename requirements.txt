@@ -23,3 +23,6 @@ shelve_cache==0.0.4
 soupsieve==2.6
 sqlparse==0.5.5
 urllib3==2.2.2
+djangorestframework_simplejwt==5.5.1
+PyJWT==2.13.0
+tzdata==2026.2

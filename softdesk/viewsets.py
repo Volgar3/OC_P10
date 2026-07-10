@@ -1,5 +1,6 @@
 from rest_framework.viewsets import ReadOnlyModelViewSet
 
+from rest_framework.permissions import IsAuthenticated
 from softdesk.models import Project, Issue, Comment
 from softdesk.serializers import ProjectSerializer, IssueSerializer, CommentSerializer
 
@@ -7,6 +8,7 @@ from softdesk.serializers import ProjectSerializer, IssueSerializer, CommentSeri
 class ProjectViewSet(ReadOnlyModelViewSet):
     
     serializer_class = ProjectSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         return Project.objects.all()
@@ -15,6 +17,7 @@ class ProjectViewSet(ReadOnlyModelViewSet):
 class IssueViewSet(ReadOnlyModelViewSet):
 
     serializer_class = IssueSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         queryset = Issue.objects.all()
@@ -27,6 +30,7 @@ class IssueViewSet(ReadOnlyModelViewSet):
 class CommentViewSet(ReadOnlyModelViewSet):
     
     serializer_class = CommentSerializer
+    permission_classes = [IsAuthenticated]
     
     def get_queryset(self):
         self.queryset = Comment.objects.all()
