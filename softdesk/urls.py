@@ -2,7 +2,7 @@ from django.urls import path, include
 
 from rest_framework import routers
 
-from softdesk.viewsets import ProjectViewSet, IssueViewSet, CommentViewSet
+from softdesk.viewsets import ProjectViewSet, IssueViewSet, CommentViewSet, ContributorViewSet
 
 from authentication.viewsets import UserViewSet
 
@@ -12,7 +12,7 @@ router.register(r"users", UserViewSet)
 router.register('project', ProjectViewSet, basename='project')
 router.register('issue', IssueViewSet, basename='issue')
 router.register('comment', CommentViewSet, basename='comment')
+router.register('contributor',ContributorViewSet, basename='contributor')
 urlpatterns = [
-    path('api-auth/', include('rest_framework.urls')),
     path('api/', include(router.urls)),
 ]

@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer, StringRelatedField
 
-from softdesk.models import Project, Issue, Comment
+from softdesk.models import Project, Issue, Comment, Contributor
 
 class ProjectSerializer(ModelSerializer):
     class Meta:
@@ -25,4 +25,10 @@ class CommentSerializer(ModelSerializer):
         model = Comment
         fields = ('uuid','description','issue','author')
         
-        
+class ContributorSerializer(ModelSerializer):
+    project = StringRelatedField()
+    user = StringRelatedField()
+    
+    class Meta:
+        model = Contributor
+        fields = ('user','project')
