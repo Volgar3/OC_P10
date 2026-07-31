@@ -1,15 +1,15 @@
 from rest_framework.viewsets import ModelViewSet
 
 from rest_framework.permissions import IsAuthenticated
-from softdesk.permisssions import IsProjectAuthor, IsAdminAuthenticated
+from softdesk.permissions import IsProjectMember, IsAdminAuthenticated
 from softdesk.models import Project, Issue, Comment, Contributor
-from softdesk.serializers import ProjectSerializer, IssueSerializer, CommentSerializer, ContributorSerializer
+from softdesk.serializers import ProjectSerializer, IssueSerializer, CommentSerializer
 
 
 class ProjectViewSet(ModelViewSet):
     
     serializer_class = ProjectSerializer
-    permission_classes = [IsAuthenticated, IsAdminAuthenticated | IsProjectAuthor]
+    permission_classes = [IsAuthenticated, IsAdminAuthenticated | IsProjectMember]
 
     def get_queryset(self):
         if self.request.user.is_superuser:
@@ -24,7 +24,7 @@ class ProjectViewSet(ModelViewSet):
 class IssueViewSet(ModelViewSet):
 
     serializer_class = IssueSerializer
-    permission_classes = [IsAuthenticated, IsAdminAuthenticated | IsProjectAuthor]
+    permission_classes = [IsAuthenticated, IsAdminAuthenticated | IsProjectMember]
 
     def get_queryset(self):
         if self.request.user.is_superuser:
@@ -44,7 +44,7 @@ class IssueViewSet(ModelViewSet):
 class CommentViewSet(ModelViewSet):
 
     serializer_class = CommentSerializer
-    permission_classes = [IsAuthenticated, IsAdminAuthenticated | IsProjectAuthor]
+    permission_classes = [IsAuthenticated, IsAdminAuthenticated | IsProjectMember]
 
     def get_queryset(self):
         if self.request.user.is_superuser:
@@ -61,19 +61,19 @@ class CommentViewSet(ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 
-class ContributorViewSet(ModelViewSet):
+# class ContributorViewSet(ModelViewSet):
 
-    serializer_class = ContributorSerializer
-    permission_classes = [IsAuthenticated, IsAdminAuthenticated | IsProjectAuthor]
+#     serializer_class = ContributorSerializer
+#     permission_classes = [IsAuthenticated, IsAdminAuthenticated | IsProjectMember]
 
-    def get_queryset(self):
-        if self.request.user.is_superuser:
-            self.queryset = Contributor.objects.all()
-        else:
-            self.queryset = Contributor.objects.filter(project__contributors__user=self.request.user)
+#     def get_queryset(self):
+#         if self.request.user.is_superuser:
+#             self.queryset = Contributor.objects.all()
+#         else:
+#             self.queryset = Contributor.objects.filter(project__contributors__user=self.request.user)
 
-        project_id = self.request.GET.get('project_id')
-        if project_id is not None:
-            self.queryset = self.queryset.filter(project_id=project_id)
+#         project_id = self.request.GET.get('project_id')
+#         if project_id is not None:
+#             self.queryset = self.queryset.filter(project_id=project_id)
 
-        return self.queryset
+#         return self.queryset
