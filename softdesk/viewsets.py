@@ -3,7 +3,7 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
 from softdesk.permissions import IsProjectMember, IsAdminAuthenticated
 from softdesk.models import Project, Issue, Comment, Contributor
-from softdesk.serializers import ProjectSerializer, IssueSerializer, CommentSerializer
+from softdesk.serializers import ProjectSerializer, IssueSerializer, CommentSerializer, ContributorSerializer
 
 
 class ProjectViewSet(ModelViewSet):
@@ -61,19 +61,19 @@ class CommentViewSet(ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
 
-# class ContributorViewSet(ModelViewSet):
+class ContributorViewSet(ModelViewSet):
 
-#     serializer_class = ContributorSerializer
-#     permission_classes = [IsAuthenticated, IsAdminAuthenticated | IsProjectMember]
+    serializer_class = ContributorSerializer
+    permission_classes = [IsAuthenticated, IsAdminAuthenticated | IsProjectMember]
 
-#     def get_queryset(self):
-#         if self.request.user.is_superuser:
-#             self.queryset = Contributor.objects.all()
-#         else:
-#             self.queryset = Contributor.objects.filter(project__contributors__user=self.request.user)
+    def get_queryset(self):
+        if self.request.user.is_superuser:
+            self.queryset = Contributor.objects.all()
+        else:
+            self.queryset = Contributor.objects.filter(project__contributors__user=self.request.user)
 
-#         project_id = self.request.GET.get('project_id')
-#         if project_id is not None:
-#             self.queryset = self.queryset.filter(project_id=project_id)
+        project_id = self.request.GET.get('project_id')
+        if project_id is not None:
+            self.queryset = self.queryset.filter(project_id=project_id)
 
-#         return self.queryset
+        return self.queryset

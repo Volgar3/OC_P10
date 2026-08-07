@@ -28,9 +28,7 @@ class CommentSerializer(ModelSerializer):
         read_only_fields = ('author',)
         
 class ContributorSerializer(ModelSerializer):
-    project = StringRelatedField()
-    user = StringRelatedField()
-    
+
     class Meta:
         model = Contributor
         fields = ('id','user','project')
