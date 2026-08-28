@@ -30,60 +30,6 @@
       "name": "Connexion démo",
       "item": [
         {
-          "name": "Access-token ADM",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "type": "text/javascript",
-                "exec": [
-                  "const data = pm.response.json();",
-                  "pm.collectionVariables.set(\"access_token\", data.access);",
-                  "pm.collectionVariables.set(\"refresh_token\", data.refresh);"
-                ]
-              }
-            }
-          ],
-          "request": {
-            "auth": {
-              "type": "noauth"
-            },
-            "method": "POST",
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              }
-            ],
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"admin\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "http://127.0.0.1:8000/auth/token/",
-              "protocol": "http",
-              "host": [
-                "127",
-                "0",
-                "0",
-                "1"
-              ],
-              "port": "8000",
-              "path": [
-                "auth",
-                "token",
-                ""
-              ]
-            }
-          },
-          "response": []
-        },
-        {
           "name": "Access-token Marie",
           "event": [
             {
@@ -196,93 +142,6 @@
     {
       "name": "Project",
       "item": [
-        {
-          "name": "Admin",
-          "item": [
-            {
-              "name": "projects-list",
-              "request": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                  "raw": "http://127.0.0.1:8000/api/project/",
-                  "protocol": "http",
-                  "host": [
-                    "127",
-                    "0",
-                    "0",
-                    "1"
-                  ],
-                  "port": "8000",
-                  "path": [
-                    "api",
-                    "project",
-                    ""
-                  ]
-                }
-              },
-              "response": []
-            },
-            {
-              "name": "project-delete",
-              "request": {
-                "method": "DELETE",
-                "header": [],
-                "url": {
-                  "raw": "http://127.0.0.1:8000/api/project/13/",
-                  "protocol": "http",
-                  "host": [
-                    "127",
-                    "0",
-                    "0",
-                    "1"
-                  ],
-                  "port": "8000",
-                  "path": [
-                    "api",
-                    "project",
-                    "13",
-                    ""
-                  ]
-                }
-              },
-              "response": []
-            },
-            {
-              "name": "create-project",
-              "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"3D print project\",\n  \"description\": \"Créer un boîtier pour joystick\",\n  \"type\": \"back-end\"\n}\n",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "http://127.0.0.1:8000/api/project/",
-                  "protocol": "http",
-                  "host": [
-                    "127",
-                    "0",
-                    "0",
-                    "1"
-                  ],
-                  "port": "8000",
-                  "path": [
-                    "api",
-                    "project",
-                    ""
-                  ]
-                }
-              },
-              "response": []
-            }
-          ]
-        },
         {
           "name": "Karim",
           "item": [
@@ -463,35 +322,6 @@
       "name": "Comment",
       "item": [
         {
-          "name": "Admin",
-          "item": [
-            {
-              "name": "comments-list",
-              "request": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                  "raw": "http://127.0.0.1:8000/api/comment/",
-                  "protocol": "http",
-                  "host": [
-                    "127",
-                    "0",
-                    "0",
-                    "1"
-                  ],
-                  "port": "8000",
-                  "path": [
-                    "api",
-                    "comment",
-                    ""
-                  ]
-                }
-              },
-              "response": []
-            }
-          ]
-        },
-        {
           "name": "Marie",
           "item": [
             {
@@ -554,68 +384,6 @@
     {
       "name": "Issues",
       "item": [
-        {
-          "name": "Admin",
-          "item": [
-            {
-              "name": "issues-list",
-              "request": {
-                "method": "GET",
-                "header": [],
-                "url": {
-                  "raw": "http://127.0.0.1:8000/api/issue/",
-                  "protocol": "http",
-                  "host": [
-                    "127",
-                    "0",
-                    "0",
-                    "1"
-                  ],
-                  "port": "8000",
-                  "path": [
-                    "api",
-                    "issue",
-                    ""
-                  ]
-                }
-              },
-              "response": []
-            },
-            {
-              "name": "create-issue",
-              "request": {
-                "method": "POST",
-                "header": [],
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"name\": \"Bouton de connexion inactif\",\n  \"description\": \"Le bouton ne réagit pas au clic sur mobile\",\n  \"priority\": \"HIGH\",\n  \"tag\": \"BUG\",\n  \"status\": \"To Do\",\n  \"project\": 2,\n  \"assignee\": 2\n}\n",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                },
-                "url": {
-                  "raw": "http://127.0.0.1:8000/api/issue/",
-                  "protocol": "http",
-                  "host": [
-                    "127",
-                    "0",
-                    "0",
-                    "1"
-                  ],
-                  "port": "8000",
-                  "path": [
-                    "api",
-                    "issue",
-                    ""
-                  ]
-                }
-              },
-              "response": []
-            }
-          ]
-        },
         {
           "name": "Marie",
           "item": [
