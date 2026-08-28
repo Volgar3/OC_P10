@@ -40,14 +40,9 @@ et encore non traitées.
 - **JWT recalé sur l'esprit « prudent par défaut »** : [config/settings.py:131-134](config/settings.py#L131-L134) — `ACCESS_TOKEN_LIFETIME` 30 min, `REFRESH_TOKEN_LIFETIME` 1 jour (au lieu de 365 jours).
 - **Collection Postman réparée** pour la démo multi-utilisateurs : plus de tokens codés en dur, dossier Comment pointant enfin vers `/api/comment/`, noms de dossiers corrigés (Karim).
 - **Pagination configurée et testée** : `DEFAULT_PAGINATION_CLASS` (`PageNumberPagination`) + `PAGE_SIZE=10` dans [config/settings.py:125-130](config/settings.py#L125-L130), couvre toutes les ressources automatiquement (config globale). Vérifié en conditions réelles avec des jeux de données à 12 éléments (projets, issues, commentaires) : la coupure 10+2 et les `next`/`previous` fonctionnent.
+- **Migration vers Poetry** : [pyproject.toml](pyproject.toml) + `poetry.lock` remplacent `requirements.txt` (supprimé). Au passage, 7 dépendances mortes (jamais importées dans le code : `beautifulsoup4`, `pymongo`, `numpy`, `Jinja2`, `shelve_cache`, `django-extension`, `requests`) ont été retirées du venv. Workflow désormais : `poetry install` au lieu de `pip install -r requirements.txt`.
 
 ## Ce qui reste à faire / à corriger, avec citation du PDF
-
-### 🟠 Gestion des dépendances — Pipenv/Poetry demandés, requirements.txt utilisé
-Citation (page 2, « Gestion des dépendances ») :
-> « nous utiliserons Pipenv ou Poetry afin de faciliter les mises à jour et l'interdépendance des bibliothèques tierces. »
-
-Le projet a `softDesk/requirements.txt`, pas de `Pipfile` ni `pyproject.toml`. À migrer vers l'un des deux avant le rendu si l'évaluation vérifie ce point précisément.
 
 ### 🟠 Configuration à durcir avant rendu (OWASP)
 Toujours dans [config/settings.py](config/settings.py) : `SECRET_KEY` en clair (valeur par défaut de `startproject`), `DEBUG = True`, `ALLOWED_HOSTS = []`. Le PDF ne les cite pas nommément mais ils relèvent du même esprit AAA/OWASP mis en avant en introduction.
@@ -69,6 +64,5 @@ Confirmé par Hugo : pas d'exigence de suite de tests dans le CDC de ce projet. 
 
 ## Suggestion d'ordre de priorité
 
-1. Migration vers Pipenv/Poetry.
-2. Durcissement `SECRET_KEY` / `DEBUG` / `ALLOWED_HOSTS`.
-3. Vérification concrète du droit à l'oubli + README.
+1. Durcissement `SECRET_KEY` / `DEBUG` / `ALLOWED_HOSTS`.
+2. Vérification concrète du droit à l'oubli + README (mentionner `poetry install`).
