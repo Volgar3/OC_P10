@@ -39,9 +39,13 @@ class IsProjectMember(BasePermission):
                 return resolving_lambda(obj)
 
     def has_object_permission(self, request, view, obj):
-        """Allow contributors to read and the project's author to write."""
+        """Allow contributors to read; only the resource's own author writes.
+
+        For `Issue`/`Comment`, the author to check is the object's own
+        author, not the project's — a project owner does not automatically
+        get edit/delete rights on someone else's issue or comment.
+        """
         project = self._get_project(obj)
-        is_author = request.user == project.author
         is_contributor = bool(
             Contributor.objects.filter(project=project.id, user=request.user)
         )
@@ -49,7 +53,10 @@ class IsProjectMember(BasePermission):
         if request.method in SAFE_METHODS:
             return is_contributor
 
-        return is_author
+        if isinstance(obj, (Issue, Comment)):
+            return request.user == obj.author
+
+        return request.user == project.author
 
     def has_permission(self, request, view):
         """Making sure than user can create/edit/delete
