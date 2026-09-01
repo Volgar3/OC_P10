@@ -2,7 +2,7 @@
 
 Projet OpenClassrooms n°10 : SoftDesk
 
-L'objectif du projet est de créer une API RESTful (Django REST Framework) permettant de gérer des **projets**, leurs **contributeurs**, des **issues** (tickets) et des **commentaires**, avec une authentification par token JWT.
+L'objectif du projet est de créer une API RESTful (Django REST Framework) permettant de gérer des **projets**, leurs **contributeurs**, des **issues** et des **commentaires**, avec une authentification par token JWT.
 
 ## Règles de gestion
 
@@ -21,7 +21,7 @@ L'objectif du projet est de créer une API RESTful (Django REST Framework) perme
 ### 1. Cloner le projet
 
 ```bash
-git clone <url-du-repo>
+git clone https://github.com/Volgar3/OC_P10.git
 cd softDesk
 ```
 
